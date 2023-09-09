@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import authOperations from './auth-operations';
 
 const initialState = {
-  user: { name: null, email: null },
+  user: { name: null, email: null, avatarUrl: null },
   token: null,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
@@ -47,6 +47,9 @@ const authSlice = createSlice({
     [authOperations.fetchCurrentUser.rejected](state, action) {
       state.isFetchingCurrentUser = false;
       state.error = action.payload;
+    },
+    [authOperations.update.fulfilled](state, action) {
+      state.user.avatarUrl = action.payload.avatarUrl;
     },
   },
 });

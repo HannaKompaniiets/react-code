@@ -1,4 +1,4 @@
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { fetchCurrentUser } from '../redux/auth/auth-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, lazy } from 'react';
@@ -14,6 +14,8 @@ const HomePage = lazy(() => import('../pages/Home'));
 const LoginPage = lazy(() => import('../pages/Login'));
 const ContactsPage = lazy(() => import('../pages/Contacts'));
 const RegisterPage = lazy(() => import('../pages/SignUp'));
+const ProfilePage = lazy(() => import('../pages/ProfilePage'));
+const UpdateAvatarPage = lazy(() => import('../pages/UpdateAvatarPage'));
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +54,25 @@ function App() {
                     />
                   }
                 />
+                <Route
+                  path="/profile"
+                  element={
+                    <PrivateRoute
+                      redirectTo="/login"
+                      component={<ProfilePage />}
+                    />
+                  }
+                />
+                <Route
+                  path="/profile/update"
+                  element={
+                    <PrivateRoute
+                      redirectTo="/login"
+                      component={<UpdateAvatarPage />}
+                    />
+                  }
+                />
+
                 <Route
                   path="/contacts"
                   element={
